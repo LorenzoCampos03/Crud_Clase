@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Color de fondo */
+    color: #333; /* Color del texto principal */
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #ffffff; /* Color de fondo del contenedor */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra */
+    border-radius: 10px;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50; /* Color del título */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select {
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+select:focus {
+    border-color: #3498db; /* Color del borde al enfocar */
+}
+
+button {
+    padding: 12px;
+    border: none;
+    background-color: #3498db; /* Color de fondo del botón */
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9; /* Color de fondo del botón al pasar el mouse */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    padding: 12px;
+    border: 1px solid #ddd; /* Borde de las celdas */
+    text-align: left;
+}
+
+th {
+    background-color: #3498db; /* Color de fondo del encabezado */
+    color: white;
+}
+
+td button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+td button:first-child {
+    background-color: #2ecc71; /* Verde */
+    color: white;
+    margin-right: 5px;
+}
+
+td button:first-child:hover {
+    background-color: #27ae60; /* Verde más oscuro al pasar el mouse */
+}
+
+td button:last-child {
+    background-color: #e74c3c; /* Rojo */
+    color: white;
+}
+
+td button:last-child:hover {
+    background-color: #c0392b; /* Rojo más oscuro al pasar el mouse */
+}

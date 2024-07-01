@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/style.css">
+  <title>CRUD App</title>
+</head>
+<body>
+  <div class="container">
+    <h1>CRUD DE PRUEBA</h1>
+    <form id="user-form" action="/users" method="post">
+      <input type="text" id="name" name="name" placeholder="Nombre" required />
+      <input type="text" id="lastname" name="lastname" placeholder="Apellido" required />
+      <input type="email" id="email" name="email" placeholder="Email" required />
+      <input type="text" id="dni" name="dni" placeholder="DNI" required />
+      <input type="text" id="phone" name="phone" placeholder="Número de Teléfono" required />
+      <input type="text" id="address" name="address" placeholder="Dirección" required />
+      <input type="date" id="birthdate" name="birthdate" required />
+      
+      <select id="role" name="role" required>
+          <option value="">Seleccionar Rol</option>
+          <option value="admin">Administrador</option>
+          <option value="user">Usuario</option>
+          <option value="guest">Invitado</option>
+      </select>
+      
+      <button type="submit">Agregar Usuario</button>
+    </form>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>DNI</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>Fecha</th>
+          <th>Rol</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="user-table-body">
+        <!-- Aquí se añadirán dinámicamente los usuarios -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    document.getElementById('user-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Recolectar datos del formulario
+      const formData = new FormData(this);
+      
+      // Enviar solicitud POST al servidor
+      fetch('/users', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data); // Mostrar mensaje de respuesta en consola
+        // Actualizar la tabla con los nuevos datos
+        fetchUsers(); // Llamar a la función para actualizar la tabla
+        this.reset(); // Limpiar formulario
+      })
+      .catch(error => console.error('Error:', error));
+    });
+
+    // Función para obtener y mostrar usuarios en la tabla
+    function fetchUsers() {
+      fetch('/users')
+        .then(response => response.json())
+        .then(users => {
+          const userTableBody = document.getElementById('user-table-body');
+          userTableBody.innerHTML = ''; // Limpiar contenido actual de la tabla
+
+          users.forEach(user => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${user.id}</td>
+              <td>${user.name}</td>
+              <td>${user.lastname}</td>
+              <td>${user.email}</td>
+              <td>${user.dni}</td>
+              <td>${user.phone}</td>
+              <td>${user.address}</td>
+              <td>${user.birthdate}</td>
+              <td>${user.role}</td>
+              <td>
+                <button onclick="editUser(${user.id})">Editar</button>
+                <button onclick="deleteUser(${user.id})">Eliminar</button>
+              </td>
+            `;
+            userTableBody.appendChild(row);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    
+    fetchUsers();
+  </script>
+
+  <style>
+    
+  </style>
+</body>
+</html>
